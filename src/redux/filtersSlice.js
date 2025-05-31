@@ -1,21 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+/**
+ * Filters Slice
+ * 
+ * Arama filtresi yönetimi için Redux slice.
+ * Kullanıcının girdiği arama terimini saklar.
+ * 
+ * State yapısı:
+ * {
+ *   value: string // Arama terimi
+ * }
+ */
 
-const initialState = {
-  filters: {
-    name: "",
-  },
-};
+import { createSlice } from "@reduxjs/toolkit";
 
 const filtersSlice = createSlice({
   name: "filters",
-  initialState,
-  reducers: {
-    changeFilter: (state, action) => {
-      state.filters.name = action.payload;
-    },
+  initialState: {
+    value: "" // Başlangıçta boş arama terimi
   },
+  reducers: {
+    // Arama terimini güncelleme
+    setFilter: (state, action) => {
+      state.value = action.payload;
+    }
+  }
 });
 
-export const { changeFilter } = filtersSlice.actions;
-export const selectNameFilter = (state) => state.filters.name;
+export const { setFilter } = filtersSlice.actions;
 export default filtersSlice.reducer;
